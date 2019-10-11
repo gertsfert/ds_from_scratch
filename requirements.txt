@@ -1,0 +1,10 @@
+cycler==0.10.0
+kiwisolver==1.1.0
+matplotlib==3.1.1
+numpy==1.17.2
+pandas==0.25.1
+pyparsing==2.4.2
+python-dateutil==2.8.0
+pytz==2019.3
+six==1.12.0
+-e git+https://github.com/gertsfert/ds_from_scratch.git@9198a3e1505348474a5af9fef317ed843ef1df53#egg=src
