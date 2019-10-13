@@ -13,22 +13,39 @@ from src.linear import (
     dot)
 
 
-def test_vector_sum():
-    v = [1, 2, 3]
-    w = [4, 5, 6]
-    z = [0, 0, 1]
-    assert vector_sum([v, w, z]) == [5, 7, 10]
+@pytest.mark.parametrize(
+    "v,w,z,expected", [
+        ([1, 2, 3], [4, 5, 6], [0, 0, 1], [5, 7, 10]),
+        ([0, 0], [0, 0], [0, 0], [0, 0]),
+        ([], [], [], []),
+        ([3], [6], [9], [18])
+    ])
+def test_vector_sum(v, w, z, expected):
+    assert vector_sum([v, w, z]) == expected
 
 
-def test_vector_sub():
-    v = [3, 6, 9]
-    w = [1, 2, 3]
-    assert vector_sub(v, w) == [2, 4, 6]
+@pytest.mark.parametrize(
+    "v,w,expected", [
+        ([3, 6, 9], [1, 2, 3], [2, 4, 6]),
+        ([10], [8], [2]),
+        ([0, 0, 0], [0, 0, 0], [0, 0, 0]),
+        ([], [], [])
+    ]
+)
+def test_vector_sub(v, w, expected):
+    assert vector_sub(v, w) == expected
 
 
-def test_vector_sum_different_sizes_exception():
+@pytest.mark.parametrize(
+    "vectors", [
+        ([[1, 2], [1]]),
+        ([[], [1, 2]]),
+        ([[], [0]])
+    ]
+)
+def test_vector_sum_different_sizes_exception(vectors):
     with pytest.raises(VectorSizesDifferentError):
-        vector_sum([[1, 2], [0]])
+        vector_sum(vectors)
 
 
 def test_vector_sub_different_sizes_exception():
